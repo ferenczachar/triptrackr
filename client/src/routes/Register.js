@@ -5,14 +5,34 @@ export default function Register(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [msg, setMsg] = useState('');
 
     async function registerUser(e){
         e.preventDefault()
-        await fetch('http://localhost:5000/createUser', {
-            method: 'POST',
-            body: JSON.stringify({username, password, email}),
-            headers: {'Content-Type':'application/json'}
-        })
+        if (username === '' || password === '' || email === ''){
+            console.log('Error: Missing fields')
+            setMsg('Error: Missing fields');
+        } else {
+            await fetch('http://localhost:5000/createUser', {
+                method: 'POST',
+                body: JSON.stringify({username, password, email}),
+                headers: {'Content-Type':'application/json'}
+            })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('User registered successfully');
+                    setMsg('Registration was successfull, please login now!');
+                } else if (response.status === 409) {
+                    console.log('Error: User already exists in the database');
+                    setMsg('Username or email already in use.');
+                } else {
+                    console.error('Error:', response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
     }
     return (
         <div>
@@ -41,7 +61,7 @@ export default function Register(){
                     value={email}
                     onChange={e => setEmail(e.target.value)}/>
                 <button>Submit</button>
-                <span className="msg"></span>
+                <span className="msg">{msg}</span>
             </form>
         </div>
     )

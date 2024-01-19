@@ -23,8 +23,13 @@ app.post('/createUser', (req, res) => {
     
     pool.query(`INSERT INTO users(username, password, email) VALUES('${username}', '${password}', '${email}');`, (error, results) => {
         if (error) {
-            console.log(error)
-            return
+            if (error.code === 'ER_DUP_ENTRY') {
+                //Duplicate entry Error
+                return res.status(409).json({ error: 'User already exists in the database' });
+            } else {
+                console.error(error);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
         }
 
         res.json({requestData:{username,password,email}});
