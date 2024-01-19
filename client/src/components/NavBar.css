@@ -1,0 +1,27 @@
+.navBar {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    background-color: plum;
+    height: 75px;
+}
+.navLogo {
+    color: white;
+    font-weight: 700;
+    margin-left: 5vw;
+}
+.navList {
+    display: flex;
+}
+
+.navList a {
+    padding-right: 10px;
+}
+.navList a:last-child {
+    padding-right: 0;
+    margin-right: 5vw;
+}
+.navList a li {
+    color: white;
+}
