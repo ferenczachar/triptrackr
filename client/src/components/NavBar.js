@@ -7,8 +7,8 @@ export default function NavBar() {
         <div className='navBar'>
             <a href='/' className='navLogo'>Logo</a>
             <ul className='navList'>
-                <a href=''><li>Login</li></a>
-                <a href=''><li>Register</li></a>
+                <a href='/login'><li>Login</li></a>
+                <a href='/register'><li>Register</li></a>
             </ul>
         </div>
     )

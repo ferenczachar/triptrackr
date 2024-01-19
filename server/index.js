@@ -7,6 +7,7 @@ const pool = require('./pool'); //db connection
 const data = require('./data'); //sample data for API
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json('This is the homepage');
@@ -14,6 +15,20 @@ app.get('/', (req, res) => {
 
 app.get('/api/test', (req, res) => {
     res.json(data);
+});
+
+app.post('/createUser', (req, res) => {
+    const {username, password, email} = req.body;
+    console.log({requestData:{username,password,email}})
+    
+    pool.query(`INSERT INTO users(username, password, email) VALUES('${username}', '${password}', '${email}');`, (error, results) => {
+        if (error) {
+            console.log(error)
+            return
+        }
+
+        res.json({requestData:{username,password,email}});
+    })
 });
 
 app.listen('5000', () => {
