@@ -36,6 +36,30 @@ app.post('/createUser', (req, res) => {
     })
 });
 
+app.post('/login', (req, res) => {
+    const { username, password } = req.body
+    console.log({loginTry:{username, password}})
+
+    pool.query(
+        'SELECT * FROM users WHERE username = ? AND password = ?',
+        [username, password],
+        (error, results) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+
+            if (results.length === 1) {
+                // Login successful
+                return res.json({ message: 'Login successful' });
+            } else {
+                // Invalid credentials
+                return res.status(401).json({ error: 'Invalid username or password' });
+            }
+        }
+    )
+})
+
 app.listen('5000', () => {
     console.log('Server is listening on PORT 5000');
 })

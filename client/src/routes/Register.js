@@ -44,6 +44,7 @@ export default function Register(){
                     type="text" 
                     id="username" 
                     name="username"
+                    autoComplete="on"
                     value={username}
                     onChange={e => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password</label>
@@ -51,6 +52,7 @@ export default function Register(){
                     type="password" 
                     id="password" 
                     name="password"
+                    autoComplete="on"
                     value={password}
                     onChange={e => setPassword(e.target.value)}/>
                 <label htmlFor="email">Email</label>
@@ -58,6 +60,7 @@ export default function Register(){
                     type="email" 
                     id="email" 
                     name="email"
+                    autoComplete="on"
                     value={email}
                     onChange={e => setEmail(e.target.value)}/>
                 <button>Submit</button>

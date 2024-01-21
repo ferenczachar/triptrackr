@@ -6,6 +6,7 @@ import './App.css'
 //routes
 import Home from './routes/Home'
 import Register from './routes/Register'
+import Login from './routes/Login'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
     <Routes>
         <Route path="/" index element={<Home />} />
         <Route path="/register" index element={<Register />} />
+        <Route path="/login" index element={<Login />} />
     </Routes>
   </BrowserRouter>
   );
