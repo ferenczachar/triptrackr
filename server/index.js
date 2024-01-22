@@ -13,8 +13,8 @@ const cookieParser = require('cookie-parser')
 const data = require('./data'); //sample data for API
 
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
-app.use(cookieParser()); //cookieParser
 app.use(express.json());
+app.use(cookieParser()); //cookieParser
 
 app.get('/', (req, res) => {
     res.json('This is the homepage');
@@ -54,7 +54,6 @@ app.post('/createUser', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body
-    console.log({loginTry:{username, password}})
     function validateUser(){
         return new Promise((resolve, reject) => { //using Promise, so I can handle the SQL query async
             pool.query(
@@ -72,7 +71,10 @@ app.post('/login', async (req, res) => {
                             if (err) {
                                 console.log(err);
                             }
-                            res.cookie('token', token).json('ok'); //Token sent via cookies + response 'ok' to client
+                            res.cookie('token', token).json({
+                                id: userDoc.id,
+                                username
+                            }); //Token sent via cookies + response to client
                         })
                     } else {
                         // Invalid credentials
@@ -92,10 +94,16 @@ app.post('/login', async (req, res) => {
 
 app.get('/profile', (req, res) => {
     const {token} = req.cookies; //If user is logged in, read the token back from cookies
-    jwt.verify(token, secret, {}, (err, info) => { //Verify the token - if correct, provide the user info
-        if (err) throw err;
-        res.json(info);
-    });
+    if (token !== '') {
+        jwt.verify(token, secret, {}, (err, info) => { //Verify the token - if correct, provide the user info
+            if (err) throw err;
+            res.json(info);
+        });
+    }
+});
+
+app.post('/logout', (req, res) => {
+    res.cookie('token', '').json('ok');
 });
 
 app.listen('5000', () => {

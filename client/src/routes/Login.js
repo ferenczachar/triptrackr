@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Navigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 export default function Login(){
     const [username, setUsername] = useState('');
@@ -8,9 +9,10 @@ export default function Login(){
     const [loginMsg, setLoginMsg] = useState('');
     const [redirect, setRedirect] = useState(false);
 
+    const {setUserInfo} = useContext(UserContext);
+
     async function login(e){
         e.preventDefault()
-        console.log(username, password);
         await fetch('http://localhost:5000/login', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
@@ -19,8 +21,10 @@ export default function Login(){
         })
         .then((response) => {
             if(response.ok){
-                console.log('Successful login')
-                setRedirect(true);
+                response.json().then(userInfo => {
+                    setUserInfo(userInfo)
+                    setRedirect(true);
+                })
             } else if (response.status === 401){
                 console.log('Invalid username or password')
                 setLoginMsg('Invalid username or password')
