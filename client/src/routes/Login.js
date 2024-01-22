@@ -1,23 +1,26 @@
 import NavBar from "../components/NavBar";
 import { useState } from 'react'
+import { Navigate } from "react-router-dom";
 
 export default function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginMsg, setLoginMsg] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
-    function login(e){
+    async function login(e){
         e.preventDefault()
         console.log(username, password);
-        fetch('http://localhost:5000/login', {
+        await fetch('http://localhost:5000/login', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
-            headers: {'Content-Type':'application/json'}
+            headers: {'Content-Type':'application/json'},
+            credentials: 'include',
         })
         .then((response) => {
             if(response.ok){
                 console.log('Successful login')
-                setLoginMsg('Successful login')
+                setRedirect(true);
             } else if (response.status === 401){
                 console.log('Invalid username or password')
                 setLoginMsg('Invalid username or password')
@@ -29,8 +32,13 @@ export default function Login(){
         .catch((err) => {
             console.log('Error received from server:' + err)
             setLoginMsg('Error received from server:' + err)
-        })
+        });
     }
+
+    if (redirect){
+        return <Navigate to={'/'}/>;
+    }
+    
     return (
         <>
             <NavBar />
