@@ -37,7 +37,7 @@ export default function NavBar() {
             <ul className='navList'>
                 { username && (
                     <>
-                        <Link to="/profile"><li>Dashboard</li></Link>
+                        <Link to="/dashboard"><li>Dashboard</li></Link>
                         <Link to="/" onClick={logout}><li>Logout ({username})</li></Link>
                     </>
                 )}
