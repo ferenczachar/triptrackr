@@ -1,0 +1,12 @@
+.postsContainerFull {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+.postsContainer {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}

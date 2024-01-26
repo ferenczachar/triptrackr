@@ -32,22 +32,24 @@ export default function NavBar() {
     const username = userInfo?.username;
 
     return (
-        <div className='navBar'>
-            <Link to="/" className="navLogo">Logo</Link>
-            <ul className='navList'>
-                { username && (
-                    <>
-                        <Link to="/dashboard"><li>Dashboard</li></Link>
-                        <Link to="/" onClick={logout}><li>Logout ({username})</li></Link>
-                    </>
-                )}
-                { !username && (
-                    <>
-                        <Link to="/login"><li>Login</li></Link>
-                        <Link to="/register"><li>Register</li></Link>
-                    </>
-                )}
-            </ul>
+        <div className='navBarContainer'>
+            <div className='navBar'>
+                <Link to="/" className="navLogo">&#9992;&#65039;TripTrackr</Link>
+                <ul className='navList'>
+                    { username && (
+                        <>
+                            <Link to="/dashboard"><li>&#128187;Dashboard</li></Link>
+                            <Link to="/" onClick={logout}><li>&#10060;Logout ({username})</li></Link>
+                        </>
+                    )}
+                    { !username && (
+                        <>
+                            <Link to="/login"><li>Login</li></Link>
+                            <Link to="/register"><li>Register</li></Link>
+                        </>
+                    )}
+                </ul>
+            </div>
         </div>
     )
 }

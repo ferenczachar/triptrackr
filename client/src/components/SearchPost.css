@@ -1,0 +1,41 @@
+.container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+form input {
+    margin-top: 10px;
+    width: 250px;
+    height: 25px;
+    border: 1px solid darkgrey;
+    border-radius: 10px 0 0 10px;
+    padding-left: 5px;
+}
+form button {
+    width: 80px;
+    height: 25px;
+    border: 1px solid darkgrey;
+    border-left: none;
+    background-color: rgb(236, 236, 236);
+    border-radius: 0 10px 10px 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: rgb(221, 221, 221);
+}
+.categories {
+    margin-top: 25px;
+}
+.categories span {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.categories span:last-child {
+    margin-right: 0;
+}
+.categories span:hover {
+    color: darkgrey;
+}

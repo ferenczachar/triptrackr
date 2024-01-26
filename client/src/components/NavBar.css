@@ -1,15 +1,23 @@
+.navBarContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 .navBar {
     display: flex;
-    width: 100vw;
+    width: 80vw;
     justify-content: space-between;
     align-items: center;
-    background-color: plum;
-    height: 75px;
+    background: none;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .navLogo {
-    color: white;
-    font-weight: 700;
-    margin-left: 5vw;
+    color: black;
+    font-weight: 900;
+    margin-left: 2vw;
+    letter-spacing: -0.2px;
 }
 .navList {
     display: flex;
@@ -20,8 +28,12 @@
 }
 .navList a:last-child {
     padding-right: 0;
-    margin-right: 5vw;
+    margin-right: 2vw;
 }
 .navList a li {
-    color: white;
+    color: black;
+}
+
+.navList a li:hover {
+    color: darkgrey;
 }
