@@ -22,7 +22,7 @@ export default function NavBar() {
     }, []);
 
     function logout() {
-        fetch('http://localhost:5000/logout', {
+        fetch('http://localhost:5000/api/auth/logout', {
             credentials: 'include',
             method: 'POST',
         })

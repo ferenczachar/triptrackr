@@ -13,7 +13,7 @@ export default function Register(){
             console.log('Error: Missing fields')
             setMsg('Error: Missing fields');
         } else {
-            await fetch('http://localhost:5000/createUser', {
+            await fetch('http://localhost:5000/api/auth/register', {
                 method: 'POST',
                 body: JSON.stringify({username, password, email}),
                 headers: {'Content-Type':'application/json'}

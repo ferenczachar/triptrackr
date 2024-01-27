@@ -14,7 +14,7 @@ export default function Login(){
 
     async function login(e){
         e.preventDefault()
-        await fetch('http://localhost:5000/login', {
+        await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: {'Content-Type':'application/json'},
