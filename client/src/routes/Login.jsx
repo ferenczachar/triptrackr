@@ -21,23 +21,20 @@ export default function Login(){
             credentials: 'include',
         })
         .then((response) => {
-            if(response.ok){
+            if (!response.ok){
+                response.json().then(error => {
+                    setLoginMsg(error);
+                })
+            } else if(response.ok){
                 response.json().then(userInfo => {
                     setUserInfo(userInfo)
                     setRedirect(true);
                 })
-            } else if (response.status === 401){
-                console.log('Invalid username or password')
-                setLoginMsg('Invalid username or password')
-            } else if (response.status === 500){
-                console.log('Internal server error')
-                setLoginMsg('Internal server error')
             }
         })
         .catch((err) => {
-            console.log('Error received from server:' + err)
-            setLoginMsg('Error received from server:' + err)
-        });
+            if (err) return setLoginMsg('Error while fetching data')
+        })
     }
 
     if (redirect){

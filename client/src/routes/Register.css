@@ -1,35 +1,36 @@
-.loginContainer {
+.registerContainer {
     display: flex;
     width: 100vw;
     justify-content: center;
 }
-.loginContainer .msg {
+.registerContainer .msg {
     margin-top: 15px;
     color: red;
     font-weight: 400;
+    text-align: center;
 }
-.login {
+.register {
     margin-top: 10vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.loginForm {
+.registerForm {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
 }
-.loginForm label {
+.registerForm label {
     font-weight: 600;
     margin: 10px 0;
 }
-.loginForm input {
+.registerForm input {
     width: 250px;
     height: 30px;
     border-radius: 5px;
     border-color: rgba(169, 169, 169, 0.2);
 }
-.loginForm button {
+.registerForm button {
     margin-top: 15px;
     height: 30px;
     border-radius: 5px;

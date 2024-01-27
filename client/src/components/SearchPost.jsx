@@ -2,9 +2,9 @@ import './SearchPost.css'
 
 export default function SearchPost(){
     return (
-        <div className='container'>
+        <div className='searchContainer'>
             <h4>Search any topic you are interested in</h4>
-            <form action='/kakaland'>
+            <form className='searchForm' action='/kakaland'>
                 <input type="text" />
                 <button>Search</button>
             </form>

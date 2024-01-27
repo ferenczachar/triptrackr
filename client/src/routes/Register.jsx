@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar"
 import {useState} from 'react';
+import './Register.css'
 
 export default function Register(){
     const [username, setUsername] = useState('');
@@ -37,35 +38,39 @@ export default function Register(){
     return (
         <div>
             <NavBar />
-            <h1>Register page</h1>
-            <form onSubmit={registerUser}>
-                <label htmlFor="username">Username</label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    name="username"
-                    autoComplete="on"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}/>
-                <label htmlFor="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password"
-                    autoComplete="on"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}/>
-                <label htmlFor="email">Email</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    autoComplete="on"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}/>
-                <button>Submit</button>
-                <span className="msg">{msg}</span>
-            </form>
+            <div className="registerContainer">
+                <div className="register">
+                    <h1>Register page</h1>
+                    <form className="registerForm" onSubmit={registerUser}>
+                        <label htmlFor="username">Username</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username"
+                            autoComplete="on"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}/>
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            autoComplete="on"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}/>
+                        <label htmlFor="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            autoComplete="on"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}/>
+                        <button>Submit</button>
+                        <span className="msg">{msg}</span>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }
