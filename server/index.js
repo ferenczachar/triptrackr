@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'asdadasdsas4k292299sksjisjr828'; //secret key
 const cookieParser = require('cookie-parser')
 
-//routes
+//import routes
 const userRoutes = require('./routes/users')
 //const postRoutes = require('./routes/posts')
 //const likeRoutes = require('./routes/likes')
@@ -18,19 +18,22 @@ const authRoutes = require('./routes/auth')
 
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
-app.use(cookieParser()); //cookieParser
+app.use(cookieParser());
 
+//middlewares
 app.use("/api/users", userRoutes)
 app.use("/api/auth", authRoutes)
 
+
+//rest of the routes
 app.get('/', (req, res) => {
     res.json('This is the homepage');
 });
 
 app.get('/profile', (req, res) => {
-    const {token} = req.cookies; //If user is logged in, read the token back from cookies
-    if (token !== '') {
-        jwt.verify(token, secret, {}, (err, info) => { //Verify the token - if correct, provide the user info
+    const {accessToken} = req.cookies; //If user is logged in, read the token back from cookies
+    if (accessToken !== '') {
+        jwt.verify(accessToken, secret, {}, (err, info) => { //Verify the token - if correct, provide the user info
             if (err) throw err;
             res.json(info);
         });
@@ -38,8 +41,8 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err, info) => {
+    const {accessToken} = req.cookies;
+    jwt.verify(accessToken, secret, {}, (err, info) => {
         if (err) throw err;
         res.json(info)
     })
