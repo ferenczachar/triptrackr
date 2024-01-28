@@ -1,0 +1,51 @@
+.createPostContainer {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+.loginContainer .msg {
+    margin-top: 15px;
+    color: red;
+    font-weight: 400;
+}
+.createPost {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.createPostForm {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.createPostForm label {
+    font-weight: 600;
+    margin: 10px 0;
+}
+.createPostForm input {
+    width: 350px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: rgba(169, 169, 169, 0.2);
+}
+.createPostForm textarea {
+    resize: none;
+    height: 250px;
+    border-radius: 5px;
+    border-color: rgba(124, 124, 124, 0.2);
+}
+.createPostForm button {
+    margin-top: 15px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: rgba(189, 247, 112, 0.466);
+    background-color: rgb(189, 247, 112);
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+}
+.createPostError {
+    margin-top: 20px;
+    color: red;
+}

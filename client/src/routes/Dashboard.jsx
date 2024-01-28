@@ -38,7 +38,6 @@ export default function Dashboard(){
                         <h1>Welcome to your dashboard, {username} &#128075;</h1>
                     </div>
                     <div className="dashboardRight dashboardColumn">
-
                     </div>
                 </div>
             </div>

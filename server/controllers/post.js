@@ -10,6 +10,7 @@ const newPost = (req, res) => {
     const { title, desc, img } = req.body;
     console.log({ id: 5, title, desc, img, likes: 0 })
     fakeDB.push({ id: 5, title, desc, img, likes: 0, createdAt: '01/28/2024' })
+    res.json('New post created successfully.');
 }
 
 module.exports = {
