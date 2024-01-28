@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser')
 
 //import routes
 const userRoutes = require('./routes/users')
-//const postRoutes = require('./routes/posts')
+const postRoutes = require('./routes/posts')
 //const likeRoutes = require('./routes/likes')
 //const commentRoutes = require('./routes/comments')
 const authRoutes = require('./routes/auth')
@@ -23,6 +23,7 @@ app.use(cookieParser());
 //middlewares
 app.use("/api/users", userRoutes)
 app.use("/api/auth", authRoutes)
+app.use("/api/posts", postRoutes)
 
 
 //rest of the routes

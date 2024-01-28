@@ -1,21 +1,21 @@
 import './Post.css'
 
-export default function Post(){
+export default function Post({ title, desc, likes, createdAt, img }){
     return (
         <div className='postContainer'>
             <div className="card">
                 <div className="card-left">
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum dolor, error voluptatum quia nemo, molestiae, quaerat eveniet id velit obcaecati voluptate mollitia adipisci.</p>
+                    <h3>{title}</h3>
+                    <p>{desc}</p>
                     <div className="cardActions">
                         <button>&#129505;</button>
-                        <span className='likesNum'>25</span>
+                        <span className='likesNum'>{likes}</span>
                     </div>
-                    <span className='creationDate'>DD/MM/YYYY</span>
+                    <span className='creationDate'>{createdAt}</span>
                 </div>
                 <div className="card-right">
                     <div className="card-right-photo">
-                        <img src="https://images.unsplash.com/photo-1488345979593-09db0f85545f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="peldakep.png" />
+                        <img src={img} alt="peldakep.png" />
                     </div>
                 </div>
             </div>

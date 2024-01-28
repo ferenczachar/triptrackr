@@ -38,6 +38,7 @@ export default function NavBar() {
                 <ul className='navList'>
                     { username && (
                         <>
+                            <Link to="/posts/new"><li>&#9997;Create Post</li></Link>
                             <Link to="/dashboard"><li>&#128187;Dashboard</li></Link>
                             <Link to="/" onClick={logout}><li>&#10060;Logout ({username})</li></Link>
                         </>

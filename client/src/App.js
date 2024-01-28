@@ -7,7 +7,9 @@ import { UserContextProvider } from "./UserContext"
 import Home from './routes/Home'
 import Register from './routes/Register'
 import Login from './routes/Login'
+//Logged in routes
 import Dashboard from './routes/Dashboard'
+import CreatePost from './routes/CreatePost'
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
             <Route path="/register" index element={<Register />} />
             <Route path="/login" index element={<Login />} />
             <Route path="/dashboard" index element={<Dashboard />} />
+            <Route path="/posts/new" index element={<CreatePost />} />
         </Routes>
       </UserContextProvider>
   );
