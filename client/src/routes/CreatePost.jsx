@@ -25,13 +25,13 @@ export default function CreatePost(){
                     setErrorMsg('Post created successfully')
                     setRedirect(true);
                 } else {
-                    console.error('Error while creating post:', response.statusText);
-                    setErrorMsg('Error while creating post:', response.statusText)
+                    console.log('Error while creating post:', response.statusText);
+                    setErrorMsg('Error while creating post: ' + response.statusText);
                 }
             }).catch((error) => {
                 if (error) {
-                    console.log('Error in catch: ' + error)
-                    setErrorMsg('Error in catch: ' + error)
+                    console.error('Error in catch: ', error)
+                    setErrorMsg('Error in catch: ' + error.message)
                 }
             })
         }
