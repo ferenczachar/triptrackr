@@ -1,32 +1,18 @@
 import './NavBar.css'
 import { Link } from 'react-router-dom'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { UserContext } from '../UserContext';
 
 export default function NavBar() {
-    const {setUserInfo, userInfo} = useContext(UserContext)
-    useEffect(() => {
-        fetch('http://localhost:5000/profile', {
-            credentials: 'include',
-        })
-        .then((response) => {
-            response.json()
-            .then((userInfo) => {
-                setUserInfo(userInfo);
-            })
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-        // eslint-disable-next-line
-    }, []);
+    
+    const {userInfo, removeLocalStorage} = useContext(UserContext)
 
     function logout() {
         fetch('http://localhost:5000/api/auth/logout', {
             credentials: 'include',
             method: 'POST',
         })
-        setUserInfo(null);
+        removeLocalStorage()
     }
 
     const username = userInfo?.username;

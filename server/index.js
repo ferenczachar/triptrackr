@@ -35,20 +35,31 @@ app.get('/profile', (req, res) => {
     const {accessToken} = req.cookies; //If user is logged in, read the token back from cookies
     if (accessToken !== '') {
         jwt.verify(accessToken, secret, {}, (err, info) => { //Verify the token - if correct, provide the user info
-            if (err) throw err;
+           if (err) throw err;
             res.json(info);
-        });
+       });
     }
 });
 
 app.get('/dashboard', (req, res) => {
-    const {accessToken} = req.cookies;
-    jwt.verify(accessToken, secret, {}, (err, info) => {
-        if (err) throw err;
-        res.json(info)
+    const token = req.cookies.accessToken;
+    if (token === '') return res.status(401).json("Not authenticated");
+    jwt.verify(token, secret, (err, userInfo) => {
+        if(err) return res.status(403).json("Token is not valid!")
+        console.log(userInfo)
+        res.json(userInfo)
     })
+    //const {accessToken} = req.cookies;
+    //jwt.verify(accessToken, secret, {}, (err, info) => {
+    //    if (err) throw err;
+    //    res.json(info)
+    //})
 });
 
 app.listen('5000', () => {
     console.log('Server is listening on PORT 5000');
 })
+
+
+
+module.exports = secret;

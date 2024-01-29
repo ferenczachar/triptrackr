@@ -1,6 +1,7 @@
 import NavBar from '../components/NavBar'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Navigate } from "react-router-dom";
+import { UserContext } from "../UserContext"
 import './CreatePost.css'
 
 export default function CreatePost(){
@@ -10,6 +11,9 @@ export default function CreatePost(){
     const [errorMsg, setErrorMsg] = useState('');
     const [redirect, setRedirect] = useState(false);
 
+    const { userInfo } = useContext(UserContext);
+    const userId = userInfo.id;
+
     function submitPost(e){
         e.preventDefault()
         if (title === '' || desc === '' || img === '') {
@@ -18,8 +22,8 @@ export default function CreatePost(){
         } else {
             fetch('http://localhost:5000/api/posts/new', {
                 method: 'POST',
-                body: JSON.stringify({title, desc, img}),
-                headers: {'Content-Type':'application/json'}
+                body: JSON.stringify({title, desc, img, userId}),
+                headers: {'Content-Type':'application/json'},
             }).then((response) => {
                 if (response.ok) {
                     setErrorMsg('Post created successfully')

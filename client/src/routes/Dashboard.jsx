@@ -4,22 +4,7 @@ import { UserContext } from "../UserContext"
 import './Dashboard.css'
 
 export default function Dashboard(){
-    const {setUserInfo, userInfo} = useContext(UserContext)
-    useEffect(() => {
-        fetch('http://localhost:5000/profile', {
-            credentials: 'include',
-        })
-        .then((response) => {
-            response.json()
-            .then((userInfo) => {
-                setUserInfo(userInfo);
-            })
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-        // eslint-disable-next-line
-    }, []);
+    const { userInfo } = useContext(UserContext)
     const username = userInfo.username;
     //const id = userInfo.id;
     return (
