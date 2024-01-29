@@ -1,12 +1,14 @@
 //db connection
 const pool = require('../pool'); //db connection
 const fakeDB = require('../data')
-const jsonwebtoken = require('jsonwebtoken')
 
 const getPost = (req, res) =>{
     //get data
-    //send data in response
-    res.json(fakeDB);
+    const q = 'SELECT * FROM posts';
+    pool.query(q, (error, results) => {
+        if (error) return console.log(error);
+        res.json(results)
+    })
 }
 
 const newPost = (req, res) => {
