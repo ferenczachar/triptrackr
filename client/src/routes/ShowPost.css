@@ -1,0 +1,47 @@
+.showPostContainerFull {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+.showPostContainer {
+    width: 80vw;
+    display: flex;
+    align-items: center;
+}
+.showPostLeft {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25px;
+}
+.showPostLeft h1 {
+    margin: 25px 0 25px;
+    letter-spacing: -0.4px;
+    font-weight: 800;
+    max-width: 80%;
+    color: rgb(82, 82, 82);
+    margin-left: 25px;
+}
+.showPostLeft p {
+    color: rgb(117, 117, 117);
+    font-size: 18px;
+    max-width: 70%;
+    margin-left: 0px;
+}
+.showPostLeft p {
+    font-weight: 600;
+}
+.showPostLeft p:nth-child(2){
+    font-size: 12px;
+    color: rgb(150, 150, 150);
+}
+.showPostLeft p:last-child {
+    margin-left: 50px;
+}
+.showPostContainer img {
+    max-width: 40vw;
+    max-height: 70vh;
+    border-radius: 15px;
+}

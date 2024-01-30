@@ -7,6 +7,7 @@
 }
 .searchForm input {
     margin-top: 10px;
+    margin-bottom: 40px;
     width: 250px;
     height: 35px;
     border: 1px solid darkgrey;

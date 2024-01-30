@@ -1,12 +1,13 @@
 import './Post.css'
+import { Link } from 'react-router-dom'
 
-export default function Post({ creator, title, desc, likes, createdAt, img }){
+export default function Post({ creator, title, desc, likes, createdAt, img, postId }){
     return (
         <div className='postContainer'>
             <div className="card">
                 <div className="card-left">
                     <p className='creatorLink'>@{creator}</p>
-                    <h3>{title.slice(0,40)}</h3>
+                    <Link to={`/posts/${postId}`}><h3>{title.slice(0,40)}</h3></Link>
                     <p>{(desc.length >= 120) ? `${desc.slice(0,120)}...` : desc}</p>
                     <div className="cardActions">
                         <button>&#129505;</button>

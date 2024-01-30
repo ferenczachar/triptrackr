@@ -10,6 +10,7 @@ import Login from './routes/Login'
 //Logged in routes
 import Dashboard from './routes/Dashboard'
 import CreatePost from './routes/CreatePost'
+import ShowPost from './routes/ShowPost'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" index element={<Login />} />
             <Route path="/dashboard" index element={<Dashboard />} />
             <Route path="/posts/new" index element={<CreatePost />} />
+            <Route path="/posts/:id" index element={<ShowPost />} />
         </Routes>
       </UserContextProvider>
   );
