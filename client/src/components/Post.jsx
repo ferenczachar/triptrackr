@@ -1,12 +1,13 @@
 import './Post.css'
 
-export default function Post({ title, desc, likes, createdAt, img }){
+export default function Post({ creator, title, desc, likes, createdAt, img }){
     return (
         <div className='postContainer'>
             <div className="card">
                 <div className="card-left">
-                    <h3>{title}</h3>
-                    <p>{desc}</p>
+                    <p className='creatorLink'>@{creator}</p>
+                    <h3>{title.slice(0,40)}</h3>
+                    <p>{(desc.length >= 120) ? `${desc.slice(0,120)}...` : desc}</p>
                     <div className="cardActions">
                         <button>&#129505;</button>
                         <span className='likesNum'>{likes}</span>

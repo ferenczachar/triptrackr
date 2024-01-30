@@ -10,3 +10,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
+.postContainer {
+    display: grid;
+    justify-content: center;
+}

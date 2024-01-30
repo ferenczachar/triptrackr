@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 
 const getPost = (req, res) =>{
     //get data
-    const q = 'SELECT * FROM posts ORDER BY id DESC;';
+    const q = 
+    'SELECT posts.id,posts.title,posts.desc,posts.img,posts.createdAt,users.username FROM posts JOIN users ON posts.userId=users.id ORDER BY posts.id DESC;';
     pool.query(q, (error, results) => {
         if (error) return console.log(error);
         res.json(results)

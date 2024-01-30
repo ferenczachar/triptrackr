@@ -1,6 +1,6 @@
 .card {
     width: 40vw;
-    height: 250px;
+    height: 270px;
     background: none;
     border: 1px solid darkgrey;
     display: flex;
@@ -18,11 +18,16 @@
     padding-left: 20px;
     flex: 1;
 }
-.card-left h3 {
+.creatorLink:hover {
+    color: black;
     cursor: pointer;
 }
-.card-left h3:hover {
+.card-left h3 {
+    cursor: pointer;
     color: rgb(82, 82, 82);
+}
+.card-left h3:hover {
+    color: black;
 }
 .card-left p {
     margin: 15px 0;

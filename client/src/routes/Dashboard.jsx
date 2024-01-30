@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import NavBar from "../components/NavBar";
 import { UserContext } from "../UserContext"
 import './Dashboard.css'
@@ -16,6 +16,7 @@ export default function Dashboard(){
                         <li>Your dashboard</li>
                         <li>Personal details</li>
                         <li>Manage posts</li>
+                        <li>User management</li>
                         <li>Logout</li>
                         <li className="dashboardDeleteID">Delete your account</li>
                     </ul>

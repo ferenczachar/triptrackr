@@ -27,7 +27,8 @@ export default function PostsContainer(){
             <div className="postsContainer">
                 {posts.map(post => {
                     return <Post 
-                    key={post.id} 
+                    key={post.id}
+                    creator={post.username} 
                     title={post.title} 
                     desc={post.desc} 
                     likes={post.likes} 
