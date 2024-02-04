@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar"
 import {useState} from 'react';
 import './Register.css'
+import axios from 'axios';
 
 export default function Register(){
     const [username, setUsername] = useState('');
@@ -14,25 +15,29 @@ export default function Register(){
             console.log('Error: Missing fields')
             setMsg('Error: Missing fields');
         } else {
-            await fetch('http://localhost:5000/api/auth/register', {
-                method: 'POST',
-                body: JSON.stringify({username, password, email}),
-                headers: {'Content-Type':'application/json'}
-            })
-            .then((response) => {
-                if (response.ok) {
+            try {
+                const response = await axios.post('http://localhost:5000/api/auth/register', {
+                    username,
+                    password,
+                    email
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            
+                if (response.status === 200) {
                     console.log('User registered successfully');
-                    setMsg('Registration was successfull, please login now!');
+                    setMsg('Registration was successful, please login now!');
                 } else if (response.status === 409) {
                     console.log('Error: User already exists in the database');
                     setMsg('Username or email already in use.');
                 } else {
                     console.error('Error:', response.statusText);
                 }
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error('Error:', error);
-            });
+            }
         }
     }
     return (

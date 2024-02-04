@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import './Login.css'
+import axios from 'axios';
 
 export default function Login(){
     const [username, setUsername] = useState('');
@@ -14,27 +15,30 @@ export default function Login(){
 
     async function login(e){
         e.preventDefault()
-        await fetch('http://localhost:5000/api/auth/login', {
-            method: 'POST',
-            body: JSON.stringify({ username, password }),
-            headers: {'Content-Type':'application/json'},
-            credentials: 'include',
-        })
-        .then((response) => {
-            if (!response.ok){
-                response.json().then(error => {
-                    setLoginMsg(error);
-                })
-            } else if(response.ok){
-                response.json().then(userInfo => {
-                    setUserInfo(userInfo)
-                    setRedirect(true);
-                })
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/login', {
+                username,
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            });
+        
+            if (!response.status === 200) {
+                setLoginMsg(response.data);
+            } else {
+                setUserInfo(response.data);
+                setRedirect(true);
             }
-        })
-        .catch((err) => {
-            if (err) return setLoginMsg('Error while fetching data')
-        })
+        } catch (error) {
+            if (error.response) {
+                setLoginMsg(error.response.data);
+            } else {
+                setLoginMsg('Error while fetching data');
+            }
+        }
     }
 
     if (redirect){

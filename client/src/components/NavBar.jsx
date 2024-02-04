@@ -2,16 +2,22 @@ import './NavBar.css'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../UserContext';
+import axios from 'axios';
 
 export default function NavBar() {
     
     const {userInfo, removeLocalStorage} = useContext(UserContext)
 
-    function logout() {
-        fetch('http://localhost:5000/api/auth/logout', {
-            credentials: 'include',
-            method: 'POST',
-        })
+    async function logout() {
+        try {
+            await axios.post('http://localhost:5000/api/auth/logout', null, {
+                withCredentials: true
+            });
+            console.log('User logged out successfully');
+            // Add any additional logic you want to perform after logout
+        } catch (error) {
+            console.error('Error:', error);
+        }
         removeLocalStorage()
     }
 
