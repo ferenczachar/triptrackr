@@ -3,6 +3,8 @@ const pool = require('../pool'); //db connection
 //token + cookies
 const jwt = require('jsonwebtoken');
 
+//'SELECT posts.id,posts.title,posts.desc,posts.img,posts.createdAt,users.username FROM posts JOIN users ON posts.userId=users.id ORDER BY posts.id DESC;'
+
 const getPost = (req, res) =>{
     //get data
     const q = 
