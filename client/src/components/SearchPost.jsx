@@ -1,11 +1,12 @@
 import './SearchPost.css'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { QueryContext } from '../QueryContext'
 
-export default function SearchPost({ onSearch }){
-    const [searchQuery, setSearchQuery] = useState('');
+export default function SearchPost(){
+    const { queryValue, setQueryValue } = useContext(QueryContext)
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
-        onSearch(searchQuery)
     };
     return (
         <div className='searchContainer'>
@@ -14,8 +15,8 @@ export default function SearchPost({ onSearch }){
                 <input
                 type="text"
                 placeholder='Scuba diving..'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}/>
+                value={queryValue}
+                onChange={(e) => setQueryValue(e.target.value)}/>
                 <button type='submit'>Search</button>
             </form>
             {/*<div className="categories">

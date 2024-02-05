@@ -1,13 +1,16 @@
 import './PostsContainer.css'
 import Post from './Post'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
+import { QueryContext } from '../QueryContext'
 
-export default function PostsContainer({ sendQuery }){
+export default function PostsContainer(){
+    const { queryValue } = useContext(QueryContext)
     const [posts, setPosts] = useState([]);
 
     const fetchPosts = async () => {
         try {
+            console.log(queryValue)
             const response = await axios.get('http://localhost:5000/api/posts/showAll', {
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,7 +29,8 @@ export default function PostsContainer({ sendQuery }){
 
     useEffect(() => {
         fetchPosts();
-    }, [])
+        // eslint-disable-next-line
+    }, [queryValue])
 
     return (
         <div className='postsContainerFull'>
