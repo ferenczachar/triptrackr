@@ -9,7 +9,5 @@ export const ProtectedRoute = () => {
     if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
     }
-    return (
-        <Outlet />
-    )
+    return <Outlet />;
 }

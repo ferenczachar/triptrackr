@@ -11,7 +11,6 @@ export default function PostsContainer(){
 
     const fetchPosts = async () => {
         try {
-            console.log(queryValue)
             const response = await axios.get('http://localhost:5000/api/posts/showAll', {
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,7 +33,7 @@ export default function PostsContainer(){
         // eslint-disable-next-line
     }, [queryValue])
 
-    if (posts && queryValue !== '' && queryValue.length > 3) { //Ha vannak posztok
+    if (posts && queryValue !== '' && queryValue.length > 3) {
         filterForPosts = true;
     }
 

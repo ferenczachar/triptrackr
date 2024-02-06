@@ -26,9 +26,8 @@ export default function ShowPost(){
 
     useEffect(() => {
         fetchPosts();
-        console.log(post[0])
-        // eslint-disable-next-line
-    }, [id, post])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id])
 
     return (
         <>

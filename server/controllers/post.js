@@ -19,7 +19,6 @@ const getPostById = (req, res) =>{
     const { id } = req.params;
     //get data
     const q = `SELECT posts.id,posts.title,posts.desc,posts.img,posts.createdAt,users.username FROM posts JOIN users ON posts.userId=users.id WHERE posts.id=${id}`;
-    console.log(id)
     pool.query(q, (error, results) => {
         if (error) return console.log('Error while trying to fetch from MySQL:' + error)
         res.json(results);
