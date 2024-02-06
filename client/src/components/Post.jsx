@@ -9,15 +9,15 @@ export default function Post({ creator, title, desc, likes, createdAt, img, post
                     <p className='creatorLink'>@{creator}</p>
                     <Link to={`/posts/${postId}`}><h3>{title.slice(0,40)}</h3></Link>
                     <p>{(desc.length >= 120) ? `${desc.slice(0,120)}...` : desc}</p>
-                    <div className="cardActions">
+                    {/*<div className="cardActions">
                         <button>&#129505;</button>
                         <span className='likesNum'>{likes}</span>
-                    </div>
+                    </div>*/}
                     <span className='creationDate'>{createdAt}</span>
                 </div>
                 <div className="card-right">
                     <div className="card-right-photo">
-                        <img src={img} alt="peldakep.png" />
+                    <Link to={`/posts/${postId}`}><img src={img} alt="peldakep.png" /></Link>
                     </div>
                 </div>
             </div>

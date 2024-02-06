@@ -27,6 +27,7 @@ export default function ShowPost(){
     useEffect(() => {
         fetchPosts();
         console.log(post[0])
+        // eslint-disable-next-line
     }, [id, post])
 
     return (
@@ -37,7 +38,7 @@ export default function ShowPost(){
             <div className="showPostContainer">
             <div className="showPostLeft">
                 <p className='showPostCreator'>@{post[0]?.username}</p>
-                <p className='showPostDate'>DD/MM/YYYY</p>
+                <p className='showPostDate'>{post[0]?.createdAt}</p>
                 <h1>{post[0]?.title}</h1>
                 <p>{post[0]?.desc}</p>
                 </div>

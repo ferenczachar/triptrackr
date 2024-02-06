@@ -5,7 +5,7 @@
     width: 100vw;
 }
 .showPostContainer {
-    width: 80vw;
+    width: 70vw;
     display: flex;
     align-items: center;
 }
@@ -13,8 +13,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex: 1;
     justify-content: center;
     margin-left: 25px;
+}
+.showPostRight {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
 }
 .showPostLeft h1 {
     margin: 25px 0 25px;
