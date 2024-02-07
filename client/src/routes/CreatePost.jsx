@@ -8,23 +8,50 @@ import axios from 'axios';
 export default function CreatePost(){
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
-    const [img, setImg] = useState('');
+    //const [img, setImg] = useState('');
+    const [file, setFile] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [redirect, setRedirect] = useState(false);
 
     const { userInfo } = useContext(UserContext);
     const userId = userInfo.id;
 
-    function submitPost(e){
+    const upload = async() => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file)
+            const res = await axios.post('http://localhost:5000/api/upload', formData);
+            return res.data
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
+    async function submitPost(e){
         e.preventDefault()
-        if (title === '' || desc === '' || img === '') {
+        let imgUrl = '';
+        if (file){
+            await upload()
+            .then((res) => {
+                imgUrl = res
+                console.log('File upload received from server: ')
+                console.log(res);
+                setFile(imgUrl)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        if (title === '' || desc === '' || file === '') {
             console.log('Empty fields')
             setErrorMsg('Please fill out all fields')
         } else {
-            axios.post('http://localhost:5000/api/posts/new', {
+            console.log(title, desc, file, userId)
+            await axios.post('http://localhost:5000/api/posts/new', {
                 title,
                 desc,
-                img,
+                img: file,
                 userId
             }, {
                 headers: {
@@ -81,11 +108,10 @@ export default function CreatePost(){
                         onChange={e => setDesc(e.target.value)}/>
                     <label htmlFor="img">Picture URL</label>
                     <input 
-                        type="text" 
-                        id='img' 
-                        name='img' 
-                        value={img}
-                        onChange={e => setImg(e.target.value)}/>
+                        type="file" 
+                        id='file' 
+                        name='file' 
+                        onChange={e => setFile(e.target.files[0])}/>
                     <button onClick={submitPost}>Submit</button>
                 </form>
                 <span className="createPostError">{errorMsg}</span>

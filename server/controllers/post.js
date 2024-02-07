@@ -27,10 +27,11 @@ const getPostById = (req, res) =>{
 
 const newPost = (req, res) => {
     const { title, desc, img, userId } = req.body; //title,desc,img from form
+    console.log(img)
     //send post data to DB
     const q = 'INSERT INTO posts(title, `desc`, img, userId) VALUES (?, ?, ?, ?)';
     const values = [title, desc, img, userId]
-    pool.query(q, values,(error, result) => {
+    pool.query(q, values,(error, res) => {
         if (error) {
             console.log(error)
         } else {

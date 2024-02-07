@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const mysql = require('mysql2');
 const pool = require('./pool'); //db connection
+const multer = require('multer')
 
 //token + cookies
 const jwt = require('jsonwebtoken');
@@ -15,6 +16,18 @@ const postRoutes = require('./routes/posts')
 //const likeRoutes = require('./routes/likes')
 //const commentRoutes = require('./routes/comments')
 const authRoutes = require('./routes/auth')
+
+//Multer config
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../client/public/postImages')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname)
+    }
+  })
+  
+const upload = multer({ storage: storage })
 
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
@@ -40,6 +53,12 @@ app.get('/profile', (req, res) => {
        });
     }
 });
+
+app.post('/api/upload', upload.single('file'), (req, res) => {
+    const file = req.file;
+    console.log(file.filename)
+    res.status(200).json(file.filename)
+})
 
 app.get('/dashboard', (req, res) => {
     const token = req.cookies.accessToken;
