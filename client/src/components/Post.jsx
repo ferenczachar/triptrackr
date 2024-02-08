@@ -17,7 +17,7 @@ export default function Post({ creator, title, desc, likes, createdAt, img, post
                 </div>
                 <div className="card-right">
                     <div className="card-right-photo">
-                    <Link to={`/posts/${postId}`}><img src={img} alt="peldakep.png" /></Link>
+                    <Link to={`/posts/${postId}`}><img src={'/assets/'+img} alt={'/assets/'+img} /></Link>
                     </div>
                 </div>
             </div>

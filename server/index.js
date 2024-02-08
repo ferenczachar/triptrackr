@@ -20,7 +20,7 @@ const authRoutes = require('./routes/auth')
 //Multer config
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../client/public/postImages')
+      cb(null, '../client/public/assets')
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + file.originalname)
@@ -56,7 +56,6 @@ app.get('/profile', (req, res) => {
 
 app.post('/api/upload', upload.single('file'), (req, res) => {
     const file = req.file;
-    console.log(file.filename)
     res.status(200).json(file.filename)
 })
 

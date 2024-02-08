@@ -42,7 +42,7 @@ export default function ShowPost(){
                 <p>{post[0]?.desc}</p>
                 </div>
                 <div className="showPostRight">
-                    <img src={post[0]?.img} alt={post[0]?.id} />
+                    <img src={`/assets/${post[0]?.img}`} alt={post[0]?.img} />
             </div>
             </div>
         </div>

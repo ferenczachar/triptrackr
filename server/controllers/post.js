@@ -30,8 +30,8 @@ const newPost = (req, res) => {
     console.log(img)
     //send post data to DB
     const q = 'INSERT INTO posts(title, `desc`, img, userId) VALUES (?, ?, ?, ?)';
-    const values = [title, desc, img, userId]
-    pool.query(q, values,(error, res) => {
+    const values = [title, desc, String(img), userId]
+    pool.query(q, values,(error, result) => {
         if (error) {
             console.log(error)
         } else {

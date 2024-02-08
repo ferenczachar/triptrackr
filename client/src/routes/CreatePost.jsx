@@ -8,11 +8,9 @@ import axios from 'axios';
 export default function CreatePost(){
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
-    //const [img, setImg] = useState('');
     const [file, setFile] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [redirect, setRedirect] = useState(false);
-
     const { userInfo } = useContext(UserContext);
     const userId = userInfo.id;
 
@@ -31,54 +29,44 @@ export default function CreatePost(){
     async function submitPost(e){
         e.preventDefault()
         let imgUrl = '';
-        if (file){
-            await upload()
-            .then((res) => {
-                imgUrl = res
-                console.log('File upload received from server: ')
-                console.log(res);
-                setFile(imgUrl)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }
-        if (title === '' || desc === '' || file === '') {
+        if (file) imgUrl = await upload();
+        if (title === '' || desc === '' || imgUrl === '') {
             console.log('Empty fields')
             setErrorMsg('Please fill out all fields')
         } else {
-            console.log(title, desc, file, userId)
-            await axios.post('http://localhost:5000/api/posts/new', {
+            try {
+                const response = await axios.post('http://localhost:5000/api/posts/new', {
                 title,
                 desc,
-                img: file,
+                img: imgUrl,
                 userId
             }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-                .then(response => {
-                    if (response.status === 200) {
-                        setErrorMsg('Post created successfully');
+                if (response.status === 200) {
+                    setErrorMsg('Post created successfully');
+                    setTimeout(() => {
                         setRedirect(true);
-                    } else {
-                        console.log('Error while creating post:', response.statusText);
-                        setErrorMsg('Error while creating post: ' + response.statusText);
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        console.error('Error in catch:', error.response.data);
-                        setErrorMsg('Error in catch: ' + error.response.data.message);
-                    } else if (error.request) {
-                        console.error('Error in catch:', error.request);
-                        setErrorMsg('Error in catch: No response received');
-                    } else {
-                        console.error('Error in catch:', error.message);
-                        setErrorMsg('Error in catch: ' + error.message);
-                    }
-                });
+                    }, 3000);
+                } else {
+                    console.log('Error while creating post:', response.statusText);
+                    setErrorMsg('Error while creating post: ' + response.statusText);
+                }
+            }
+            catch (error) {
+                if (error.response) {
+                    console.error('Error in catch:', error.response.data);
+                    setErrorMsg('Error in catch: ' + error.response.data.message);
+                } else if (error.request) {
+                    console.error('Error in catch:', error.request);
+                    setErrorMsg('Error in catch: No response received');
+                } else {
+                    console.error('Error in catch:', error.message);
+                    setErrorMsg('Error in catch: ' + error.message);
+                }
+            };
         }
     }
 
