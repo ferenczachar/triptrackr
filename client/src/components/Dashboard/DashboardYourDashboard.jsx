@@ -7,6 +7,10 @@ export default function DashboardYourDashboard(){
     return (
         <>
             <h1>Welcome to your dashboard, {username} &#128075;</h1>
+            <div className="yourDashboardContainer">
+                <h3>You can navigate through the menu on the left hand side,</h3>
+                <h4>&#x2190; Select one that fits your interest.</h4>
+            </div>
         </>
     )
 }

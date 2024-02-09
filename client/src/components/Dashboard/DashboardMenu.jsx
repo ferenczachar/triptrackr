@@ -17,9 +17,6 @@ export default function DashboardMenu(){
     const showDeleteAccount = (e) => {
         setContentValue(e.target.id);
     }
-    const logout = () => {
-        console.log('Logout clicked')
-    }
 
     useEffect(() => {
     }, [contentValue])
@@ -31,7 +28,7 @@ export default function DashboardMenu(){
                 <li onClick={showPersonal}  id="2">Personal details</li>
                 <li onClick={showManagePosts}  id="3">Manage posts</li>
                 {/*<li>User management</li>*/}
-                <li onClick={logout}>Logout</li>
+                {/*<li onClick={logout}>Logout</li>*/}
                 <li className="dashboardDeleteID" onClick={showDeleteAccount}  id="4">Delete your account</li>
             </ul>
         </>
