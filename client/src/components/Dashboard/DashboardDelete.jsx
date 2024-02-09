@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { UserContext } from "../../UserContext"
+//import { UserContext } from "../../UserContext"
 import { DashboardContext } from "../../context/DashboardContext"
 
 export default function DashboardManagePosts(){
-    const { userInfo } = useContext(UserContext)
+    //const { userInfo } = useContext(UserContext)
     const { setContentValue } = useContext(DashboardContext)
+    
     const dontDelete = () =>{
         setContentValue('1');
     }

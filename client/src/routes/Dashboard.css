@@ -96,11 +96,13 @@
     border-radius: 10px;
 }
 .managePost {
+    height: 100px;
     display: flex;
     background-color: rgb(65, 65, 65);
     max-width: 100%;
     border-radius: 10px;
     overflow: hidden;
+    margin: 10px 0;
 }
 .managePost .postImg,
 .managePost .postDetails,
