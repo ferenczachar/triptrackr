@@ -1,9 +1,11 @@
 //import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
+import { ProtectedRoute } from './controllers/ProtectedRoute'
+
+//context
 import { UserContextProvider } from "./UserContext"
 import { QueryContextProvider } from "./QueryContext"
-import { ProtectedRoute } from './controllers/ProtectedRoute'
 
 //routes
 import Home from './routes/Home'
