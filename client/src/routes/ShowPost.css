@@ -1,5 +1,12 @@
+.backToHome {
+    margin-left: 12vw;
+    margin-top: 5vh;
+}
+.editPostBtn {
+    margin-left: 15px;
+}
 .showPostContainerFull {
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     width: 100vw;

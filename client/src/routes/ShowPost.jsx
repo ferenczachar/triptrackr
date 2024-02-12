@@ -1,7 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar'
+import BackToHome from '../components/BackToHome'
+import EditPostBtn from '../components/EditPostBtn'
 import './ShowPost.css'
+
 
 export default function ShowPost(){
     const [post, setPost] = useState([]);
@@ -32,6 +35,8 @@ export default function ShowPost(){
     return (
         <>
         <NavBar/>
+        <BackToHome />
+        <EditPostBtn />
         <>
         <div className="showPostContainerFull">
             <div className="showPostContainer">
