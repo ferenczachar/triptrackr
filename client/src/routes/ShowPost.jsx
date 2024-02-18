@@ -1,30 +1,37 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import NavBar from '../components/NavBar'
 import BackToHome from '../components/BackToHome'
 import EditPostBtn from '../components/EditPostBtn'
 import './ShowPost.css'
+import { UserContext } from '../UserContext';
 
 
 export default function ShowPost(){
     const [post, setPost] = useState([]);
     const { id } = useParams()
+    const { userInfo } = useContext(UserContext);
 
     const fetchPosts = async () => {
-        await fetch(`http://localhost:5000/api/posts/${id}`, {
-        method: 'GET',
-        headers: {'Content-Type':'application/json'}
-        }).then((response) => {
-            if (response.ok) {
-                response.json().then((data) => {
-                    setPost(data);
-                })
-            } else {
-                console.log('Error in response: ' + response)
-            }
-        }).catch((error) => {
-            console.log('Error in catch: ' + error)
-        })
+        try {
+            await fetch(`http://localhost:5000/api/posts/${id}`, {
+            method: 'GET',
+            headers: {'Content-Type':'application/json'}
+            }).then((response) => {
+                if (response.ok) {
+                    response.json().then((data) => {
+                        setPost(data);
+                    })
+                } else {
+                    console.log('Error in response: ' + response)
+                }
+            }).catch((error) => {
+                console.log('Error in catch: ' + error)
+            })
+        }
+        catch (error) {
+            console.log('Error in axios - from catch')
+        }
     }
 
     useEffect(() => {
@@ -35,8 +42,8 @@ export default function ShowPost(){
     return (
         <>
         <NavBar/>
-        <BackToHome />
-        <EditPostBtn />
+        <BackToHome/>
+        {userInfo && <EditPostBtn postId={id}/> }
         <>
         <div className="showPostContainerFull">
             <div className="showPostContainer">
