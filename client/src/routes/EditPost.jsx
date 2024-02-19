@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import axios from 'axios'
@@ -7,6 +7,7 @@ import './EditPost.css'
 
 export default function EditPost(){
     const { id } = useParams();
+    const [redirect, setRedirect] = useState(false);
     const [ post, setPost ] = useState({});
     const [ title, setTitle ] = useState('');
     const [ desc, setDesc ] = useState('');
@@ -41,13 +42,40 @@ export default function EditPost(){
 
     const submitEditedPost = async (e) => {
         e.preventDefault();
-        if (title === '' || desc === '') {
-            console.log('Empty fields')
-            setErrorMsg('Please fill out all fields')
+        if (title === '' && desc === '') {
+            console.log('Empty fields/Nothing has been changed')
+            setErrorMsg('No changes / Please fill out all fields')
         } else {
-            console.log('Submitted your data:')
-            console.log({ id, title, desc, userId })
+            try {
+                const response = await axios.put("http://localhost:5000/api/posts/edit",{
+                    postId: id,
+                    title,
+                    desc,
+                    userId
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (response.status === 200) {
+                    console.log(response.data)
+                    setErrorMsg('Post modified successfully')
+                    setTimeout(() => {
+                        setRedirect(true);
+                    }, 3000);
+                } else {
+                    console.log('Error in axios')
+                }
+            }
+            catch (error) {
+                console.log(error)
+            }
         }
+    }
+
+    if (redirect){
+        return <Navigate to={'/'}/>;
     }
 
     return (
