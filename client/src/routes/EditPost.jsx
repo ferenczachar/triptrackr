@@ -3,28 +3,16 @@ import { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import axios from 'axios'
 import { UserContext } from "../UserContext"
+import './EditPost.css'
 
 export default function EditPost(){
     const { id } = useParams();
     const [ post, setPost ] = useState({});
     const [ title, setTitle ] = useState('');
     const [ desc, setDesc ] = useState('');
-    const [file, setFile] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const { userInfo } = useContext(UserContext);
     const userId = userInfo.id;
-
-    const upload = async() => {
-        try {
-            const formData = new FormData();
-            formData.append('file', file)
-            const res = await axios.post('http://localhost:5000/api/upload', formData);
-            return res.data
-        }
-        catch(err) {
-            console.log(err)
-        }
-    }
 
     const getPost = async () => {
         try {
@@ -53,8 +41,6 @@ export default function EditPost(){
 
     const submitEditedPost = async (e) => {
         e.preventDefault();
-        let imgUrl = '';
-        if (file) imgUrl = await upload();
         if (title === '' || desc === '') {
             console.log('Empty fields')
             setErrorMsg('Please fill out all fields')
@@ -84,12 +70,8 @@ export default function EditPost(){
                         name='desc'
                         defaultValue={post?.desc || ''}
                         onChange={e => setDesc(e.target.value)}/>
-                    <label htmlFor="img">Picture URL</label>
-                    <input 
-                        type="file" 
-                        id='file' 
-                        name='file'                        
-                        onChange={e => setFile(e.target.files[0])}/>
+                    <label htmlFor="img">Picture (Cannot be changed)</label>
+                    <img src={"/assets/" + post?.img} alt="" />
                     <button onClick={submitEditedPost}>Submit</button>
                 </form>
                 <span className="createPostError">{errorMsg}</span>

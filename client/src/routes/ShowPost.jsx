@@ -43,7 +43,7 @@ export default function ShowPost(){
         <>
         <NavBar/>
         <BackToHome/>
-        {userInfo && <EditPostBtn postId={id}/> }
+        {(userInfo.username === post[0]?.username) && <EditPostBtn postId={id}/>}
         <>
         <div className="showPostContainerFull">
             <div className="showPostContainer">
