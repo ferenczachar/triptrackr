@@ -1,5 +1,5 @@
 const express = require('express');
-const { getPost, getPostById, newPost, getPostsByUser, editPost } = require('../controllers/post.js');
+const { getPost, getPostById, newPost, getPostsByUser, editPost, deletePost } = require('../controllers/post.js');
 
 const router = express.Router();
 
@@ -13,5 +13,8 @@ router.post('/userPosts', getPostsByUser)
 
 //PUT
 router.put('/edit', editPost)
+
+//DELETE
+router.delete('/delete/:id', deletePost)
 
 module.exports = router;

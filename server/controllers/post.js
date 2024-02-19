@@ -84,10 +84,19 @@ const editPost = (req, res) => {
     }
 }
 
+const deletePost = (req, res) => {
+    const postId = req.params.id;
+    const q = 'DELETE from posts WHERE id = ?;'
+    pool.query(q, postId, (error, result) => {
+        error ? console.log(error) : res.json(`Successfully deleted from DB`);
+    })
+}
+
 module.exports = {
     getPost,
     getPostById,
     newPost,
     getPostsByUser,
-    editPost
+    editPost,
+    deletePost
 }

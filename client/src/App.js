@@ -16,6 +16,7 @@ import Dashboard from './routes/Dashboard'
 import CreatePost from './routes/CreatePost'
 import ShowPost from './routes/ShowPost'
 import EditPost from './routes/EditPost'
+import DeletePost from './routes/DeletePost'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/posts/new" element={<CreatePost />} />
                 <Route path="/posts/:id/edit" element={<EditPost />} />
+                <Route path="/posts/:id/delete" element={<DeletePost />} />
               </Route>
           </Routes>
         </QueryContextProvider>

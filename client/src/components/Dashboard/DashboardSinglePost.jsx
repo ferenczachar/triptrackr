@@ -12,7 +12,7 @@ export default function DashboardSinglePost({ id, title, img, createdAt }){
                 <p>Last updated: { createdAt.slice(0, 10) }</p>
             </div>
             <div className="postActions">
-                <span>Edit</span>
+            <Link to={`/posts/${id}/edit`}><span>Edit</span></Link>
             </div>
         </div>
         </>

@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import NavBar from '../components/NavBar'
 import BackToHome from '../components/BackToHome'
 import EditPostBtn from '../components/EditPostBtn'
+import DeletePostBtn from '../components/DeletePostBtn'
 import './ShowPost.css'
 import { UserContext } from '../UserContext';
 
@@ -44,6 +45,7 @@ export default function ShowPost(){
         <NavBar/>
         <BackToHome/>
         {(userInfo.username === post[0]?.username) && <EditPostBtn postId={id}/>}
+        {(userInfo.username === post[0]?.username) && <DeletePostBtn postId={id}/>}
         <>
         <div className="showPostContainerFull">
             <div className="showPostContainer">

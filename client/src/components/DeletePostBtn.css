@@ -1,0 +1,13 @@
+.deletePostBtn {
+    font-weight: 800;
+    font-size: 14px;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: rgb(163, 50, 50);
+    cursor: pointer;
+    color: white;
+}
+.deletePostBtn:hover {
+    background-color: rgb(206, 60, 60);
+}

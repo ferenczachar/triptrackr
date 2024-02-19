@@ -1,0 +1,55 @@
+.deletePostFormContainer {
+    margin-top: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.deletePostForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.deletePostForm .buttons {
+    margin-top: 5vh;
+    display: flex;
+}
+.deletePostForm .buttons button {
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+.deletePostForm .buttons button:first-child {
+    margin-right: 20px;
+    background-color: greenyellow;
+}
+.deletePostForm .buttons button:first-child:hover {
+    background-color: rgb(151, 252, 1);
+}
+.deletePostForm .buttons button:last-child {
+    background-color: rgb(211, 58, 58);
+    color: white;
+}
+.deletePostForm .buttons button:last-child:hover {
+    background-color: rgb(255, 108, 108);
+}
+.currentPost {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 25px;
+    background: rgb(255,49,49);
+    background: radial-gradient(circle, rgba(255,49,49,0.6) 0%, rgba(255,205,124,0.6) 100%);
+}
+.currentPost img {
+    margin-top: 15px;
+    max-width: 20vw;
+    max-height: 40vh;
+    border-radius: 25px;
+}
