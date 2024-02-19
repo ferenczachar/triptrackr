@@ -51,31 +51,36 @@ const newPost = (req, res) => {
 }
 
 const editPost = (req, res) => {
-    const { postId, title, desc, userId } = req.body;
-    //scenarios
-    //if title changed, but desc not
-    if ( desc === '' ) {
-        const q = 'UPDATE posts SET title = ? WHERE id = ?;';
-        const values = [title, postId];
-        pool.query(q, values, (error, result) => {
-            error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
-        })
-    }
-    //if desc changed, but title not
-    else if ( title === '' ) {
-        const q = 'UPDATE posts SET `desc` = ? WHERE id = ?;';
-        const values = [desc, postId];
-        pool.query(q, values, (error, result) => {
-            error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
-        })
-    } 
-    //if both changed
-    else {
-        const q = 'UPDATE posts SET title = ? , `desc` = ? WHERE id = ?;';
-        const values = [title, desc, postId];
-        pool.query(q, values, (error, result) => {
-            error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
-        })
+    const { postId, title, desc, userId, postUserName, username } = req.body;
+    //authenticate the author
+    if ( postUserName !== username) {
+        res.json('Only authors can edit their post(s).')
+    } else {
+        //scenarios
+        //if title changed, but desc not
+        if ( desc === '' ) {
+            const q = 'UPDATE posts SET title = ? WHERE id = ?;';
+            const values = [title, postId];
+            pool.query(q, values, (error, result) => {
+                error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
+            })
+        }
+        //if desc changed, but title not
+        else if ( title === '' ) {
+            const q = 'UPDATE posts SET `desc` = ? WHERE id = ?;';
+            const values = [desc, postId];
+            pool.query(q, values, (error, result) => {
+                error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
+            })
+        } 
+        //if both changed
+        else {
+            const q = 'UPDATE posts SET title = ? , `desc` = ? WHERE id = ?;';
+            const values = [title, desc, postId];
+            pool.query(q, values, (error, result) => {
+                error ? console.log(error) : res.json({ requestData: { postId, title, desc, userId } });
+            })
+        }
     }
 }
 

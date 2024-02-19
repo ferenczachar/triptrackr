@@ -24,6 +24,7 @@ export default function EditPost(){
             })
             if (response.status === 200) {
                 setPost(response.data[0])
+                console.log(response.data[0])
             } else {
                 console.log('Error in axios:')
                 console.log(response)
@@ -49,9 +50,11 @@ export default function EditPost(){
             try {
                 const response = await axios.put("http://localhost:5000/api/posts/edit",{
                     postId: id,
+                    postUserName: post.username,
                     title,
                     desc,
-                    userId
+                    userId,
+                    username: userInfo.username
                 },
                 {
                     headers: {
