@@ -13,6 +13,7 @@ export default function DashboardSinglePost({ id, title, img, createdAt }){
             </div>
             <div className="postActions">
             <Link to={`/posts/${id}/edit`}><span>Edit</span></Link>
+            <Link to={`/posts/${id}/delete`}><span>Delete</span></Link>
             </div>
         </div>
         </>
