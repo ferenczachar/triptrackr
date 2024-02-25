@@ -18,7 +18,7 @@ const getPost = (req, res) =>{
 const getPostById = (req, res) =>{
     const { id } = req.params;
     //get data
-    const q = `SELECT posts.id,posts.title,posts.desc,posts.img,posts.createdAt,users.username FROM posts JOIN users ON posts.userId=users.id WHERE posts.id=${id}`;
+    const q = `SELECT posts.id,posts.title,posts.desc,posts.img,posts.createdAt,posts.userId AS authorId,users.username FROM posts JOIN users ON posts.userId=users.id WHERE posts.id=${id}`;
     pool.query(q, (error, results) => {
         if (error) return console.log('Error while trying to fetch from MySQL:' + error)
         res.json(results);
@@ -28,7 +28,7 @@ const getPostById = (req, res) =>{
 const getPostsByUser = (req, res) => {
     const { id } = req.body; //get user's id
     //get posts by userID from db
-    const q = 'SELECT posts.id, posts.title, posts.img, posts.createdAt FROM posts WHERE posts.userId=?';
+    const q = 'SELECT posts.id, posts.title, posts.img, posts.createdAt, users.id AS authorId, users.username AS authorName FROM posts JOIN users ON posts.userId=users.id WHERE posts.userId=?';
     pool.query(q, id,(error, results) => {
         if (error) return console.log('Error while trying to fetch from MySQL:' + error)
         res.json(results)

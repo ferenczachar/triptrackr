@@ -15,31 +15,43 @@ export default function EditPost(){
     const { userInfo } = useContext(UserContext);
     const userId = userInfo.id;
 
-    const getPost = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/api/posts/${id}`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            if (response.status === 200) {
-                setPost(response.data[0])
-                console.log(response.data[0])
-            } else {
-                console.log('Error in axios:')
-                console.log(response)
-            }
-        }
-        catch (error) {
-            console.log('Try error:')
-            console.log(error)
-        }
-    }
-
     useEffect(() => {
-        getPost();
-        // eslint-disable-next-line
-    }, [id])
+        const fetchData = async () => {
+            // Check if user is logged in
+            if (!userId) {
+                setRedirect(true);
+                return;
+            }
+    
+            try {
+                // Fetch the post
+                const response = await axios.get(`http://localhost:5000/api/posts/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                if (response.status === 200) {
+                    const postData = response.data[0];
+                    // Check if logged-in user is the author of the post
+                    if (userId !== postData.authorId) {
+                        setRedirect(true);
+                    } else {
+                        // Set the post state if everything is fine
+                        setPost(postData);
+                    }
+                } else {
+                    console.log('Error in axios:');
+                    console.log(response);
+                }
+            } catch (error) {
+                console.log('Error fetching post:');
+                console.log(error);
+            }
+        };
+    
+        fetchData();
+    }, [userId, id]);
 
     const submitEditedPost = async (e) => {
         e.preventDefault();
@@ -62,7 +74,6 @@ export default function EditPost(){
                     }
                 })
                 if (response.status === 200) {
-                    console.log(response.data)
                     setErrorMsg('Post modified successfully')
                     setTimeout(() => {
                         setRedirect(true);
@@ -76,6 +87,7 @@ export default function EditPost(){
             }
         }
     }
+    
 
     if (redirect){
         return <Navigate to={'/'}/>;

@@ -26,8 +26,8 @@ export default function CreatePost(){
         }
     }
 
-    async function submitPost(e){
-        e.preventDefault()
+    const submitPost = async (e) => {
+        e.preventDefault();
         let imgUrl = '';
         if (file) imgUrl = await upload();
         if (title === '' || desc === '' || imgUrl === '') {
@@ -49,7 +49,7 @@ export default function CreatePost(){
                     setErrorMsg('Post created successfully');
                     setTimeout(() => {
                         setRedirect(true);
-                    }, 3000);
+                    }, 5000);
                 } else {
                     console.log('Error while creating post:', response.statusText);
                     setErrorMsg('Error while creating post: ' + response.statusText);
@@ -80,7 +80,7 @@ export default function CreatePost(){
         <div className="createPostContainer">
             <div className="createPost">
             <h1>Create your post here</h1>
-                <form className='createPostForm'>
+                <form className='createPostForm' onSubmit={submitPost}>
                     <label htmlFor="title">Title</label>
                     <input 
                         type="text" 
@@ -100,7 +100,7 @@ export default function CreatePost(){
                         id='file' 
                         name='file' 
                         onChange={e => setFile(e.target.files[0])}/>
-                    <button onClick={submitPost}>Submit</button>
+                    <button type='submit'>Submit</button>
                 </form>
                 <span className="createPostError">{errorMsg}</span>
             </div>
