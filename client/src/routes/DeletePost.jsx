@@ -1,7 +1,8 @@
 import NavBar from "../components/NavBar"
 import './DeletePost.css'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link, useParams, Navigate } from "react-router-dom"
+import { UserContext } from "../UserContext"
 import axios from "axios"
 
 export default function DeletePost(){
@@ -9,24 +10,40 @@ export default function DeletePost(){
     const [ post, setPost ] = useState(null);
     const [ errorMsg, setErrorMsg] = useState('');
     const [ redirect, setRedirect ] = useState(false);
+    const { userInfo } = useContext(UserContext);
+    const userId = userInfo.id;
 
-    const getPostById = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/api/posts/${id}`, {
-                headers: {
-                    "Content-Type": "application/json",
+    useEffect(() => {
+        const fetchData = async () => {
+            // Check if user is logged in
+            if (!userId) {
+                setRedirect(true)
+            }
+            try {
+                const response = await axios.get(`http://localhost:5000/api/posts/${id}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+                if (response.status === 200) {
+                    const postData = response.data[0];
+                        // Check if logged-in user is the author of the post
+                        if (userId !== postData.authorId) {
+                            setRedirect(true);
+                        } else {
+                            // Set the post state if everything is fine
+                            setPost(postData);
+                        }
+                } else {
+                    console.log('Error from Axios')
                 }
-            })
-            if (response.status === 200) {
-                setPost(response.data[0]);
-            } else {
-                console.log('Error from Axios')
+            }
+            catch (error) {
+                console.log(error);
             }
         }
-        catch (error) {
-            console.log(error);
-        }
-    }
+        fetchData()
+    }, [id])
 
     const submitDeletion = async (e) => {
         e.preventDefault();
@@ -46,11 +63,6 @@ export default function DeletePost(){
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        getPostById();
-        // eslint-disable-next-line
-    }, [id])
 
     if (redirect) {
         return <Navigate to={'/'}/>;
